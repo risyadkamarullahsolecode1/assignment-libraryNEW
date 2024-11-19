@@ -73,6 +73,7 @@ const BookList = () => {
                 variant="danger"
                 size="sm"
                 onClick={() => confirmDelete(book.id)}
+                className="ms-2"
               >
                 Delete
               </CustomButton>

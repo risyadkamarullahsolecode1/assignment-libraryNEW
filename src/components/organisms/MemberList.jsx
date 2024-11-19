@@ -72,6 +72,7 @@ const MembersPage = () => {
                 variant="danger"
                 size="sm"
                 onClick={() => confirmDelete(member.id)}
+                className="ms-2"
               >
                 Delete
               </CustomButton>

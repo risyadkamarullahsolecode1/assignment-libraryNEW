@@ -14,6 +14,10 @@ import BookDetailPage from './components/pages/BookDetailPage';
 import MemberDetailPage from './components/pages/MemberDetailPage';
 import InfiniteScrollList from './components/pages/InfiniteScroll';
 import BookManagemets from './components/pages/BookManagements';
+import BorrowPage from './components/pages/BorrowPage';
+import BorrowForm from './components/molecules/BorrowForm';
+import ReturnForm from './components/molecules/ReturnForm';
+import ReturnPage from './components/pages/ReturnPage';
 
 export const queryClient = new QueryClient();
 
@@ -27,13 +31,17 @@ function App() {
         <Route path="/books" element={<BookManagemets />} />
         <Route path="/books/:id" element={<BookDetailPage />} />
         <Route path="/books/add" element={<AddBookPage />} />
+        <Route path="/books/search" element={<BooksPage />} />
         <Route path="/books/edit/:id" element={<EditBookPage />} />
         <Route path="/members" element={<MembersPage />} />
         <Route path="/members/add" element={<AddMemberPage />} />
         <Route path="/members/:id" element={<MemberDetailPage />} />
         <Route path="/members/edit/:id" element={<EditMemberPage />} />
         <Route path="/infinite" element={<InfiniteScrollList />} />
-      
+        <Route path="/borrow" element={<BorrowPage />} />
+        <Route path="/borrow/form" element={<BorrowForm />} />
+        <Route path="/return" element={<ReturnPage />} />
+        <Route path="/return/form" element={<ReturnForm />} />
       </Routes>
     </Router>
     </QueryClientProvider>
