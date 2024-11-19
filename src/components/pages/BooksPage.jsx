@@ -4,9 +4,6 @@ import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import ReactPaginate from 'react-paginate';
 import BookService from '../../service/BookService';
 import './pagination.css'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-const PAGE_SIZE = 10; // Define page size constant
 
 // Function to fetch books based on pagination
 const fetchBooks = async ({ page, pageSize, searchQuery, sortField, sortOrder }) => {
@@ -36,7 +33,7 @@ const BooksPage = () => {
     onSuccess: (data) => {
         console.log(data); // Log the data to inspect its structure
       },
-      placeholderData: keepPreviousData
+    placeholderData: keepPreviousData
   });
 
   // Check if the data is loading or error occurred

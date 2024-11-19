@@ -12,6 +12,8 @@ import EditBookPage from './components/pages/EditBookPage';
 import EditMemberPage from './components/pages/EditMemberPage';
 import BookDetailPage from './components/pages/BookDetailPage';
 import MemberDetailPage from './components/pages/MemberDetailPage';
+import InfiniteScrollList from './components/pages/InfiniteScroll';
+import BookManagemets from './components/pages/BookManagements';
 
 export const queryClient = new QueryClient();
 
@@ -22,7 +24,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/books" element={<BooksPage />} />
+        <Route path="/books" element={<BookManagemets />} />
         <Route path="/books/:id" element={<BookDetailPage />} />
         <Route path="/books/add" element={<AddBookPage />} />
         <Route path="/books/edit/:id" element={<EditBookPage />} />
@@ -30,6 +32,8 @@ function App() {
         <Route path="/members/add" element={<AddMemberPage />} />
         <Route path="/members/:id" element={<MemberDetailPage />} />
         <Route path="/members/edit/:id" element={<EditMemberPage />} />
+        <Route path="/infinite" element={<InfiniteScrollList />} />
+      
       </Routes>
     </Router>
     </QueryClientProvider>

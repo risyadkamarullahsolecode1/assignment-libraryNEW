@@ -33,6 +33,9 @@ const Header = () => {
             <Nav.Link as={NavLink} to="/return">
               Return
             </Nav.Link>
+            <Nav.Link as={NavLink} to="/infinite">
+              Infinite
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
