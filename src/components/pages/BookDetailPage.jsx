@@ -1,46 +1,69 @@
-import React, {useState,useEffect} from 'react';
-import { useParams, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
 import apiClient from '../../axiosConfig';
 
-const BookDetailPage = ({ books }) => {
+const BookDetailPage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [book, setBook] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    apiClient.get(`/Book/${id}`)
-      .then((response) => {
-        setBook(response.data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        setError("Failed to load book details.");
-        setLoading(false);
-      });
-  }, [id]);
+useEffect(() => {
+  // Fetch book details based on ISBN or ID from API
+  apiClient.get(`/Book/${id}`)
+    .then((response) => {
+      setBook(response.data);
+      setLoading(false);
+    })
+    .catch((err) => {
+      setError("Failed to load book details.");
+      setLoading(false);
+    });
+}, [id]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>{error}</div>;
-  if (!book) return <div>Book not found</div>;
+if (loading) return <div>Loading...</div>;
+if (error) return <div>{error}</div>;
+if (!book) return <div>Book not found</div>;
 
   return (
-    <Card>
-      <Card.Body>
-        <Card.Title>{book.title}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{book.author}</Card.Subtitle>
-        <Card.Text>
-          <strong>ISBN:</strong> {book.isbn}<br />
-          <strong>Title:</strong> {book.title}<br />
-          <strong>Author:</strong> {book.author}<br />
-          <strong>Publication Year:</strong> {book.publicationYear}
-        </Card.Text>
-        <Link to={`/books/edit/${book.isbn}`}>
-          <Button variant="warning">Edit</Button>
-        </Link>
-      </Card.Body>
-    </Card>
+    <div>
+      {book ? (
+        <Card>
+          <Card.Header as="h5">Book Details</Card.Header>
+          <Card.Body>
+            <Card.Title>{book.title}</Card.Title>
+            <Card.Text>
+              <strong>Book :</strong> {book.title} 
+            </Card.Text>
+            <Card.Text>
+              <strong>Author :</strong> {book.author} 
+            </Card.Text>
+            <Card.Text>
+              <strong>Publisher :</strong> {book.publisher} 
+            </Card.Text>
+            <Card.Text>
+              <strong>Category :</strong> {book.category}
+            </Card.Text>
+            <Card.Text>
+              <strong>ISBN :</strong> {book.isbn}
+            </Card.Text>
+            <Card.Text>
+              <strong>Location :</strong> {book.location}
+            </Card.Text>
+            <Card.Text>
+              <strong>Description :</strong> {book.description}
+            </Card.Text>
+            <Button variant="primary" onClick={() => navigate('/books/')}>
+              Back to Book List
+            </Button>
+          </Card.Body>
+        </Card>
+      ) : (
+        <p>Loading book details...</p>
+      )}
+    </div>
   );
 };
 

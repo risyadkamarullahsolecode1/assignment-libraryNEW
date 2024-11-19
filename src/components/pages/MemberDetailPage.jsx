@@ -1,4 +1,3 @@
-// src/components/pages/MemberDetailPage.jsx
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card, Button } from 'react-bootstrap';
@@ -36,13 +35,22 @@ if (!member) return <div>Member not found</div>;
           <Card.Body>
             <Card.Title>{member.name}</Card.Title>
             <Card.Text>
-              <strong>Name :</strong> {member.name}
+              <strong>Name :</strong> {member.firstName} {member.lastName}
             </Card.Text>
             <Card.Text>
-              <strong>Email:</strong> {member.email}
+              <strong>Member Card Number :</strong> {member.libraryCardNumber} 
             </Card.Text>
             <Card.Text>
-              <strong>Phone:</strong> {member.noHp}
+              <strong>Member Card Expired Date :</strong> {member.libraryCardExpDate} 
+            </Card.Text>
+            <Card.Text>
+              <strong>Previlege:</strong> {member.previlege}
+            </Card.Text>
+            <Card.Text>
+              <strong>Position:</strong> {member.position}
+            </Card.Text>
+            <Card.Text>
+              <strong>Note:</strong> {member.note}
             </Card.Text>
             <Button variant="primary" onClick={() => navigate('/members')}>
               Back to Members List

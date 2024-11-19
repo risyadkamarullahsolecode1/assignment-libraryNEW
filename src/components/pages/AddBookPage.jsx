@@ -1,86 +1,31 @@
-import React, { useEffect, useState } from 'react';
-import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import CustomButton from '../atoms/Button';
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import BookForm from '../molecules/BookForm';
 import apiClient from '../../axiosConfig';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-const MembersPage = () => {
-  const [members, setMembers] = useState([]);
+const AddBookPage = () => {
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    apiClient.get('/User')
-      .then(response => setMembers(response.data))
-      .catch(error => console.error("Error fetching books:", error));
-  }, []);
-
-  const confirmDelete = (id) => {
-    toast.warn("Are you sure you want to delete this member?", {
-      position: "top-center",
-      autoClose: false,
-      closeOnClick: false,
-      closeButton: true,
-      draggable: false,
-      pauseOnHover: true,
-      hideProgressBar: true,
-      onClose: () => {},  // No action on close
-      onClick: () => handleDelete(id)  // Proceed with deletion on click
-    });
-  };
-
-  const handleDelete = (id) => {
-    apiClient.delete(`/User/${id}`)
+  const handleAddBook = (newBook) => {
+    apiClient
+      .post('/Book', newBook)
       .then(() => {
-        setMembers(members.filter((member) => member.id !== id))
-        toast.success("Member deleted successfully!");
+        toast.success('Book added successfully!');
+        navigate('/books'); // Redirect to the books list page
       })
-      .catch((error) => console.error("Error deleting book:", error));
+      .catch((error) => {
+        toast.error(`Failed to add book: ${error.response?.data?.message || 'Unknown error'}`);
+      });
   };
-
 
   return (
-    <div>
-      <h1>Members</h1>
-      <Table responsive striped bordered hover className="mt-3">
-        <thead>
-          <tr>
-            <th>Member ID</th>
-            <th>Full Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {members.map((member) => (
-            <tr key={member.id}>
-              <td>{member.id}</td>
-              <td>{member.name}</td>
-              <td>{member.email}</td>
-              <td>{member.noHp}</td>
-              <td>
-                <Link to={`/members/${member.id}`}>
-                  <CustomButton variant="info" size="sm">View</CustomButton>
-                </Link>
-                <Link to={`/members/edit/${member.id}`} className="ms-2">
-                  <CustomButton variant="warning" size="sm">Edit</CustomButton>
-                </Link>
-                <CustomButton
-                variant="danger"
-                size="sm"
-                onClick={() => confirmDelete(member.id)}
-              >
-                Delete
-              </CustomButton>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-      <ToastContainer />
-    </div>
+    <Container>
+      <h1>Add New Book</h1>
+      <BookForm onSubmit={handleAddBook} /> {/* Pass the onSubmit handler */}
+    </Container>
   );
 };
 
-export default MembersPage;
+export default AddBookPage;

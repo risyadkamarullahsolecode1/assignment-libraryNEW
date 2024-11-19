@@ -47,8 +47,9 @@ const MembersPage = () => {
           <tr>
             <th>Member ID</th>
             <th>Full Name</th>
-            <th>Email</th>
-            <th>Phone</th>
+            <th>Position</th>
+            <th>Library Card Number</th>
+            <th>Library Card Expired Date</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -56,9 +57,10 @@ const MembersPage = () => {
           {members.map((member) => (
             <tr key={member.id}>
               <td>{member.id}</td>
-              <td>{member.name}</td>
-              <td>{member.email}</td>
-              <td>{member.noHp}</td>
+              <td>{member.firstName} {member.lastName}</td>
+              <td>{member.position}</td>
+              <td>{member.libraryCardNumber}</td>
+              <td>{member.libraryCardExpDate}</td>
               <td>
                 <Link to={`/members/${member.id}`}>
                   <CustomButton variant="info" size="sm">View</CustomButton>

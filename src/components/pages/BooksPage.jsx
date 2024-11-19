@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
-import { Container, ListGroup } from 'react-bootstrap';
+import { Container, ListGroup, InputGroup, Form, Table, Button } from 'react-bootstrap';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import ReactPaginate from 'react-paginate';
 import BookService from '../../service/BookService';
 import './pagination.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+const PAGE_SIZE = 10; // Define page size constant
 
 // Function to fetch books based on pagination
 const fetchBooks = async ({ page, pageSize, searchQuery, sortField, sortOrder }) => {
@@ -77,43 +80,60 @@ const BooksPage = () => {
   return (
     <Container>
       <h1>Books</h1>
-      <div className="input-group">
-        <span className="input-group-text">Search </span>
-        <input placeholder="Cari pengguna..." type="text" className="form-control"
-        onChange={handleSearch} value={searchQuery}/>
-        </div>
-      <ListGroup className="list-group mb-4">
+        <InputGroup className="mb-3">
+            <InputGroup.Text>Search </InputGroup.Text>
+            <Form.Control placeholder="Cari keyword..." type="text" className="form-control"
+            onChange={handleSearch} value={searchQuery}/>
+        </InputGroup>
+
+        <Table bordered hover responsive>
+            <thead>
+                <tr>
+                    <th style={{ width: '80px' }}>
+                        <Button variant="link"
+                        onClick={() => handleSort('id')}
+                        className="text-decoration-none text-dark p-0">
+                        ID {getSortIcon('id')}
+                        </Button>
+                    </th>
+                    <th style={{ width: '80px' }}>
+                        <Button variant="link"
+                        onClick={() => handleSort('author')}
+                        className="text-decoration-none text-dark p-0">
+                        Author {getSortIcon('author')}
+                        </Button>
+                    </th>
+                    <th style={{ width: '80px' }}>
+                        <Button variant="link"
+                        onClick={() => handleSort('title')}
+                        className="text-decoration-none text-dark p-0">
+                        Title {getSortIcon('title')}
+                        </Button>
+                    </th>
+                </tr>
+            </thead>
+      </Table>
+
+      <ListGroup className="mb-4">
         {data?.data?.map((book) => (
           <ListGroup.Item key={book.id}>
-            {book.id}. {book.title} by {book.author}
+            {book.id}. the book title is {book.title} by {book.author} with category {book.category}
           </ListGroup.Item>
         ))}
       </ListGroup>
-      <div className="mt-3">
+
+      <Container className="mt-3">
         {"Items per Page: "}
-        <select onChange={handlePageSizeChange} value={pageSize}>
+        <Form.Select onChange={handlePageSizeChange} value={pageSize}>
           {pageSizes.map((size) => (
             <option key={size} value={size}>
               {size}
             </option>
           ))}
-        </select>
-      </div>
-      <div className="table-responsive">
-        <table className="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th style={{ width: '80px' }}>
-                        <button variant="link"
-                        onClick={() => handleSort('id')}
-                        className="text-decoration-none text-dark p-0">
-                        ID {getSortIcon('id')}
-                        </button>
-                    </th>
-                </tr>
-            </thead>
-        </table>
-      </div>
+        </Form.Select>
+      </Container>
+
+      
       <ReactPaginate
         previousLabel={"Previous"}
         nextLabel={"Next"}
