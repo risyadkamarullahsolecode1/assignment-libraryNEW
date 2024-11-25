@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../../slices/authSlice';
-import { Button, Card, Container } from 'react-bootstrap';
+import { Button, Card, Container, Form, Row, Col, Alert } from 'react-bootstrap';
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -50,29 +50,45 @@ const Login = () => {
     return (
         <Container>     
           <Card.Title className="text-center text-white">Login</Card.Title>
-            <form onSubmit={onSubmit}>
-              <div className="mb-4">
-                <label htmlFor="username" className="form-label">Username</label>
-                <input type="text" className="form-control" id="username" name="username"
-                 value={username} onChange={onChange} required placeholder="Enter username"/>
-              </div>
-              <div className="mb-4">
-                <label htmlFor="password" className="form-label">Password</label>
-                <input type="password" className="form-control" id="password" name="password"
-                 value={password} onChange={onChange} required placeholder="Enter password" />
-              </div>
-              <div className="d-grid">
-                <button type="submit" className="btn btn-primary" disabled={isLoading} >
+            <Form onSubmit={onSubmit}>
+            <Col>
+              <Row className="mb-4">
+                <Form.Label htmlFor="username" className="form-label">Username</Form.Label>
+                <Form.Control 
+                    type="text" 
+                    className="form-control" 
+                    id="username" name="username"
+                    value={username} 
+                    onChange={onChange} 
+                    required 
+                    placeholder="Enter username"
+                />
+              </Row>
+              <Row className="mb-4">
+                <Form.Label htmlFor="password" className="form-label">Password</Form.Label>
+                <Form.Control 
+                    type="password" 
+                    className="form-control" 
+                    id="password" name="password"
+                    value={password} 
+                    onChange={onChange} 
+                    required 
+                    placeholder="Enter password" 
+                />
+              </Row>
+              <Row className="d-grid">
+                <Button type="submit" className="btn btn-primary" disabled={isLoading} >
                   {isLoading ? 'Logging in...' : 'Login'}
-                </button>
-              </div>
-            </form>         
+                </Button>
+              </Row>
+            </Col>
+            </Form>         
             {message && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
+            <Form.Group>
+              <Alert className="alert alert-danger" role="alert">
                 {message}
-              </div>
-            </div>
+              </Alert>
+            </Form.Group>
           )} 
         </Container>
       );     

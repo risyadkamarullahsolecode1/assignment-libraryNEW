@@ -4,6 +4,7 @@ import BookDetailPage from "./components/pages/BookDetailPage";
 import BooksPage from "./components/pages/BooksPage";
 import HomePage from "./components/pages/HomePage";
 import MemberDetailPage from "./components/pages/MemberDetailPage";
+import Register from "./components/pages/register";
 
 export const routers = createBrowserRouter([
     {   
@@ -62,6 +63,10 @@ export const routers = createBrowserRouter([
          {
            path: "/login",
            element: <Login />,
+         },
+         {
+            path: "/register",
+            element: <Register />,
          },
          {
            path: "/register",

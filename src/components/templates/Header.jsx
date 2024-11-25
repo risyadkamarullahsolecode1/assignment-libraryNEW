@@ -67,13 +67,12 @@ const Header = () => {
   };
 
   return (
-    <header>
-      <h2>Library Management System</h2>    
-
-      <Navbar bg="light" expand="lg">
+    <header>  
+      <Navbar expand="lg" bg="primary" data-bs-theme="dark" sticky="top" className="bg-body-tertiary">
         <Container>
           <Navbar.Brand href="#">Library App</Navbar.Brand>
-          
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             {menuItems.filter(isMenuVisible).map((item, index) => (       
               <Nav.Link key={index} href={item.path}
@@ -82,6 +81,7 @@ const Header = () => {
               </Nav.Link> 
             ))}
           </Nav>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
 

@@ -14,7 +14,7 @@ const initialState = {
 
 // Register user
 export const register = createAsyncThunk(
-  'Auth/register',
+  'Auth/Add-User-Roles',
   async (userData, thunkAPI) => {
     try {
       return await authService.register(userData);
@@ -50,7 +50,19 @@ export const logout = createAsyncThunk(
         }
 }
 );  
-    
+
+export const refreshToken = createAsyncThunk(
+  'Auth/refreshToken',
+  async (_, { rejectWithValue }) => {
+    try {      
+      const response= await authService.refreshToken();
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
 const authSlice = createSlice({
     name: 'Auth',
     initialState,
@@ -85,6 +97,12 @@ const authSlice = createSlice({
         .addCase(logout.fulfilled, (state) => {
           state.user = null;
         });
+        // refresh
+      //   .addCase(refreshToken.rejected, (state) => {
+      //     state.user = null;
+      //     state.isAuthenticated = false;
+      //     localStorage.removeItem('user');
+      //  });
     },
 });
 export const { reset } = authSlice.actions;

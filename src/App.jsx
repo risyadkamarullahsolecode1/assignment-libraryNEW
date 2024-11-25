@@ -21,6 +21,7 @@ import ReturnPage from './components/pages/ReturnPage';
 import Login from './components/pages/login';
 import Profile from './components/pages/profile';
 import Footer from './components/templates/Footer';
+import Register from './components/pages/register';
 
 export const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/return" element={<ReturnPage />} />
         <Route path="/return/form" element={<ReturnForm />} />
         <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
         <Route path="/profile" element={<Profile />}/>
       </Routes>
       <Footer />
