@@ -18,6 +18,9 @@ import BorrowPage from './components/pages/BorrowPage';
 import BorrowForm from './components/molecules/BorrowForm';
 import ReturnForm from './components/molecules/ReturnForm';
 import ReturnPage from './components/pages/ReturnPage';
+import Login from './components/pages/login';
+import Profile from './components/pages/profile';
+import Footer from './components/templates/Footer';
 
 export const queryClient = new QueryClient();
 
@@ -42,7 +45,10 @@ function App() {
         <Route path="/borrow/form" element={<BorrowForm />} />
         <Route path="/return" element={<ReturnPage />} />
         <Route path="/return/form" element={<ReturnForm />} />
+        <Route path="/login" element={<Login />}/>
+        <Route path="/profile" element={<Profile />}/>
       </Routes>
+      <Footer />
     </Router>
     </QueryClientProvider>
   )

@@ -1,45 +1,96 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../../slices/authSlice';
 import { Navbar, Nav, Container } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user: currentUser } = useSelector(state => state.auth);
+
+  // Menu items definition
+  const menuItems = [
+    { 
+      label: 'Dashboard', path: '/', visibleForAll: true 
+    },    
+    { 
+      label: 'Profil', path: '/profile', 
+      visibleForRoles: ['Librarian', 'Library Manager', 'Library User'] 
+    },
+    { 
+      label: 'Daftar Buku', path: '/books', visibleForRoles: ['Librarian'] 
+    },
+    { 
+      label: 'Members', path: '/members', visibleForRoles: ['Library Manager'] 
+    },
+    { 
+      label: 'Login', path: '/login', isAuthenticated: false 
+    },
+    { 
+      label: 'Register', path: '/register', isAuthenticated: false 
+    },
+    { 
+      label: 'Logout'
+    },
+  ];
+
+  // Check if the menu item should be visible
+  const isMenuVisible = (item) => {
+    // Always show menu for all users
+    if (item.visibleForAll) return true;
+
+    // If user is not logged in, show menus with isAuthenticated: false
+    if (item.isAuthenticated === false && !currentUser) {
+      return true;
+    }
+
+    // If user is logged in, show the logout option
+    if (item.label === 'Logout' && currentUser) {
+      return true;
+    }
+
+    // Check role-specific menus
+    if (item.visibleForRoles && currentUser?.roles) {
+      return item.visibleForRoles.some(role => 
+        currentUser.roles.includes(role)
+      );
+    }
+
+    return false;
+  };
+
+  // Handle logout
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/'); // Redirect to the home page after logging out
+  };
+
   return (
-    <Navbar bg="primary" variant="dark" expand="lg" sticky="top">
-      <Container>
-        <Navbar.Brand as={NavLink} to="/">
-          Library Management
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
+    <header>
+      <h2>Library Management System</h2>    
+
+      <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="#">Library App</Navbar.Brand>
+          
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/" end>
-              Home
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/books">
-              Books
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/books/add">
-              Add Book
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/members">
-              Members
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/members/add">
-              Add Member
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/borrow">
-              Borrow
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/return">
-              Return
-            </Nav.Link>
-            <Nav.Link as={NavLink} to="/infinite">
-              Infinite
-            </Nav.Link>
+            {menuItems.filter(isMenuVisible).map((item, index) => (       
+              <Nav.Link key={index} href={item.path}
+                onClick={item.label === 'Logout' ? handleLogout : null}>
+                {item.label}
+              </Nav.Link> 
+            ))}
           </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+        </Container>
+      </Navbar>
+
+      {currentUser && (
+        <h6>
+          Welcome, <strong>{currentUser.user.userName}</strong>
+        </h6>
+      )}
+    </header>
   );
 };
 
