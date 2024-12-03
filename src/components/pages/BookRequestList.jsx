@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Table, Spinner, Alert, Container, Button, Modal } from "react-bootstrap";
 import axios from "axios";
 import ReviewBookRequestForm from "../molecules/ReviewBookRequestForm";
+import { Link } from "react-router-dom";
 
 const BookRequestList = () => {
   const [bookRequests, setBookRequests] = useState([]);
@@ -79,6 +80,7 @@ const BookRequestList = () => {
             <th>Publisher</th>
             <th>Status</th>
             <th>Step</th>
+            <th>Requester</th>
             <th>Process</th>
             <th>Action</th>
           </tr>
@@ -92,11 +94,17 @@ const BookRequestList = () => {
               <td>{request.publisher}</td>
               <td>{request.status}</td>
               <td>{request.currentStep}</td>
+              <td>{request.applicantName}</td>
               <td>{request.processId}</td>
               <td>
-                <Button onClick={() => handleReviewClick(request.processId)}>
+                <Button variant="warning" onClick={() => handleReviewClick(request.processId)}>
                   Review
                 </Button>
+                <Link to={`/request/${request.processId}`}>
+                    <Button variant="primary">
+                    Details
+                    </Button>
+                </Link>
               </td>
             </tr>
           ))}
