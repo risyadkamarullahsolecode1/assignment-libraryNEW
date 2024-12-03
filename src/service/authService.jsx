@@ -1,7 +1,7 @@
 import apiClient from "../axiosConfig";
 
 const register = async (userData) => {
-    const response = await apiClient.post("/User/Add-User-Roles", userData);
+    const response = await apiClient.post("/Auth/register", userData);
     return response.data;
 };
 
@@ -11,24 +11,23 @@ const assign = async (userName, userData) => {
 };
 
 const login = async (userData) => {
-    const response = await apiClient.post("/Auth/login", userData);
-    if (response.data.token) {
+const response = await apiClient.post("/Auth/login", userData);
+if (response.data.user) {
     localStorage.setItem("user", JSON.stringify(response.data));
-    }  
-    return response.data;  
-}; 
-
-const logout = async () => {
-    await apiClient.post(`Auth/logout`);
-    localStorage.removeItem('user');
+}
+return response.data;
 };
 
-const refreshToken = async () => {
-    const response = await api.post(`/Auth/refresh-token`, );
-    if (response.data.token) {
-        localStorage.setItem("user", JSON.stringify(response.data));  
-    }
+const logout = async () => { 
+    await apiClient.post(`Auth/logout`);  
+    localStorage.removeItem('user');  
 };
+
+const refreshToken = async () => { 
+    const response = await api.post("/Auth/refresh-token");
+    return response.data;
+};
+
 const authService = { 
     register, 
     login,

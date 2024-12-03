@@ -1,3 +1,4 @@
+import BookRequestForm from "./components/molecules/BookRequestForm";
 import MembersPage from "./components/organisms/MemberList";
 import AddBookPage from "./components/pages/AddBookPage";
 import BookDetailPage from "./components/pages/BookDetailPage";
@@ -5,6 +6,7 @@ import BooksPage from "./components/pages/BooksPage";
 import HomePage from "./components/pages/HomePage";
 import MemberDetailPage from "./components/pages/MemberDetailPage";
 import Register from "./components/pages/register";
+import UploadFiles from "./components/pages/uploadfile";
 
 export const routers = createBrowserRouter([
     {   
@@ -31,6 +33,10 @@ export const routers = createBrowserRouter([
           path: "/books/:id",
           element: <BookDetailPage />,
        },
+       {
+        path: "/upload",
+        element: <UploadFiles />,
+       },
       ]
     },     
     {   
@@ -41,6 +47,10 @@ export const routers = createBrowserRouter([
            path: "/members",
            element: <MembersPage />,
          },       
+         {
+           path: "/upload",
+           element: <UploadFiles />,
+         },       
        ]
     },
     {   
@@ -50,6 +60,10 @@ export const routers = createBrowserRouter([
           {
             path: "/users/:id",
             element: <MemberDetailPage />,
+          },       
+          {
+            path: "/bookrequest/new",
+            element: <BookRequestForm />,
           },       
         ]
     },          

@@ -22,6 +22,8 @@ import Login from './components/pages/login';
 import Profile from './components/pages/profile';
 import Footer from './components/templates/Footer';
 import Register from './components/pages/register';
+import UploadFiles from './components/pages/uploadfile';
+import BookRequestForm from './components/molecules/BookRequestForm';
 
 export const queryClient = new QueryClient();
 
@@ -49,6 +51,8 @@ function App() {
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
         <Route path="/profile" element={<Profile />}/>
+        <Route path="/upload" element={<UploadFiles />}/>
+        <Route path="/bookrequest/new" element={<BookRequestForm />}/>
       </Routes>
       <Footer />
     </Router>

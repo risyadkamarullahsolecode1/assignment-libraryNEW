@@ -22,7 +22,13 @@ const Header = () => {
       label: 'Daftar Buku', path: '/books', visibleForRoles: ['Librarian'] 
     },
     { 
+      label: 'Upload File', path: '/upload', visibleForRoles: ['Librarian', 'Library Manager'] 
+    },
+    { 
       label: 'Members', path: '/members', visibleForRoles: ['Library Manager'] 
+    },
+    { 
+      label: 'Book Request', path: '/bookrequest/new', visibleForRoles: ['Library User'] 
     },
     { 
       label: 'Login', path: '/login', isAuthenticated: false 
@@ -87,7 +93,7 @@ const Header = () => {
 
       {currentUser && (
         <h6>
-          Welcome, <strong>{currentUser.user.userName}</strong>
+          
         </h6>
       )}
     </header>
