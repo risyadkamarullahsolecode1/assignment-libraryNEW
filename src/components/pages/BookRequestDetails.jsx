@@ -60,7 +60,7 @@ const BookRequestDetails = () => {
                 </ListGroup.Item>
               ))}
             </ListGroup>
-            <Button variant="primary" onClick={() => navigate('/request')}>
+            <Button variant="primary" onClick={() => navigate('/bookrequest')}>
               Back to Request List
             </Button>
           </Card.Body>

@@ -100,7 +100,7 @@ const BookRequestList = () => {
                 <Button variant="warning" onClick={() => handleReviewClick(request.processId)}>
                   Review
                 </Button>
-                <Link to={`/request/${request.processId}`}>
+                <Link to={`/bookrequest/${request.processId}`}>
                     <Button variant="primary">
                     Details
                     </Button>
