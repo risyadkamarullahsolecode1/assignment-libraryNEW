@@ -26,6 +26,8 @@ const Header = () => {
     },
     { 
       label: 'Members', path: '/members', visibleForRoles: ['Library Manager'] 
+    },{ 
+      label: 'Book Request List', path: '/bookrequest', visibleForRoles: ['Library User', 'Librarian', 'Library Manager'] 
     },
     { 
       label: 'Book Request', path: '/bookrequest/new', visibleForRoles: ['Library User'] 

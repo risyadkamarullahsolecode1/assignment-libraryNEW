@@ -2,6 +2,7 @@ import BookRequestForm from "./components/molecules/BookRequestForm";
 import MembersPage from "./components/organisms/MemberList";
 import AddBookPage from "./components/pages/AddBookPage";
 import BookDetailPage from "./components/pages/BookDetailPage";
+import BookRequestList from "./components/pages/BookRequestList";
 import BooksPage from "./components/pages/BooksPage";
 import HomePage from "./components/pages/HomePage";
 import MemberDetailPage from "./components/pages/MemberDetailPage";
@@ -37,6 +38,10 @@ export const routers = createBrowserRouter([
         path: "/upload",
         element: <UploadFiles />,
        },
+       {
+        path: "/bookrequest",
+        element: <BookRequestList />,
+       },
       ]
     },     
     {   
@@ -50,6 +55,10 @@ export const routers = createBrowserRouter([
          {
            path: "/upload",
            element: <UploadFiles />,
+         },
+         {
+          path: "/bookrequest",
+          element: <BookRequestList />,
          },       
        ]
     },
@@ -64,7 +73,11 @@ export const routers = createBrowserRouter([
           {
             path: "/bookrequest/new",
             element: <BookRequestForm />,
-          },       
+          }, 
+          {
+            path: "/bookrequest",
+            element: <BookRequestList />,
+          },      
         ]
     },          
     {/* Rute Publik */

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Container, Alert, Spinner, Button } from 'react-bootstrap';
-import CustomButton from '../atoms/Button';
-import InputField from '../atoms/InputField';
-import { ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -63,7 +61,11 @@ const BookRequestForm = () => {
 
     return (
         <Container className="mt-5 mb-5">
-            <h2>Submit Book Request</h2>
+            <h2 className="text-center mx-auto">Submit Book Request</h2>
+            {responseMessage && (
+            <Alert variant={responseStatus === "Success" ? "success" : "danger"}>{responseMessage}</Alert>
+            )}
+
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
                     <Form.Label>Request Name</Form.Label>
