@@ -26,6 +26,8 @@ import UploadFiles from './components/pages/uploadfile';
 import BookRequestForm from './components/molecules/BookRequestForm';
 import BookRequestList from './components/pages/BookRequestList';
 import BookRequestDetails from './components/pages/BookRequestDetails';
+import Dashboard from './components/pages/Dashboard';
+import Report from './components/pages/Report';
 
 export const queryClient = new QueryClient();
 
@@ -57,6 +59,8 @@ function App() {
         <Route path="/bookrequest/new" element={<BookRequestForm />}/>
         <Route path="/bookrequest" element={<BookRequestList />}/>
         <Route path="/bookrequest/:processId" element={<BookRequestDetails />}/>
+        <Route path="/dashboard" element={<Dashboard />}/>
+        <Route path="/report" element={<Report />}/>
       </Routes>
       <Footer />
     </Router>

@@ -12,7 +12,13 @@ const Header = () => {
   // Menu items definition
   const menuItems = [
     { 
-      label: 'Dashboard', path: '/', visibleForAll: true 
+      label: 'Home', path: '/', visibleForAll: true 
+    },    
+    { 
+      label: 'Dashboard', path: '/dashboard', visibleForAll: true 
+    },    
+    { 
+      label: 'Report', path: '/report', visibleForAll: true 
     },    
     { 
       label: 'Profil', path: '/profile', 
