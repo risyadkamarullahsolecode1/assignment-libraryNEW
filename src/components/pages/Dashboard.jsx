@@ -48,10 +48,10 @@ const Dashboard = () => {
     const overdueBooks = Array.isArray(dashboard.overdueBooks)
     ? dashboard.overdueBooks.map((item) => ({
         borrowId: item.borrowId,
-        bookTitle: item.book.title,
+        bookTitle: item.bookTitle,
         dueDate: item.dueDate,
         penalty: item.penalty,
-        userName: item.appUser.userName
+        userName: item.userName
     }))
     : [];  
 
